@@ -1,0 +1,36 @@
+{
+  "publication": "psor-semantic-contract/1.0.0-draft.1",
+  "publicationDate": "2026-10-04",
+  "releaseDigest": "sha256:32005ebc542b055323de871ddc5ec28deb7b586de9943eb18f40fceb40ea1fa5",
+  "digestMethod": "sha256-path-hash-v1",
+  "releaseManifestSha256": "76be41cb141ef50d853106dc2e144fee2df4d31b82030336a47e10ac8a6e7786",
+  "repository": "https://github.com/ramerstalboll/psor-semantic-contract",
+  "tag": "v1.0.0-draft.1",
+  "releaseUrl": "https://github.com/ramerstalboll/psor-semantic-contract/releases/tag/v1.0.0-draft.1",
+  "publicCommit": "c9e61c11c459f7ceee55f6a7c770eac5ff580abf",
+  "mirror": "https://psor.eu/spec/semantic-contract/1.0-draft.1/",
+  "frozenArchive": {
+    "url": "https://github.com/ramerstalboll/psor-semantic-contract/releases/download/v1.0.0-draft.1/psor-semantic-contract-1.0.0-draft.1.zip",
+    "name": "psor-semantic-contract-1.0.0-draft.1.zip",
+    "sha256": "b4039b4bbdbe4046bf73c0f5ebbeb1ca469fab7168cf154c58748ab4435a5614",
+    "bytes": 26245
+  },
+  "doi": "10.5281/zenodo.23129510",
+  "doiStatus": "published",
+  "zenodoRecord": "https://zenodo.org/records/23129510",
+  "zenodoConceptDoi": "10.5281/zenodo.23129509",
+  "swhid": "swh:1:snp:2a693dde42474f395f74b2145c67f3494af0bc73",
+  "softwareHeritageSnapshotUrl": "https://archive.softwareheritage.org/api/1/snapshot/2a693dde42474f395f74b2145c67f3494af0bc73/",
+  "softwareHeritageStatus": "archived-full",
+  "softwareHeritageTagRevision": "c9e61c11c459f7ceee55f6a7c770eac5ff580abf",
+  "softwareHeritageSaveRequest": {
+    "origin": "https://github.com/ramerstalboll/psor-semantic-contract",
+    "status": "succeeded",
+    "requestId": 2532285,
+    "requestUrl": "https://archive.softwareheritage.org/api/1/origin/save/?visit_type=git&origin_url=https%3A%2F%2Fgithub.com%2Framerstalboll%2Fpsor-semantic-contract",
+    "saveRequestDateUtc": "2026-10-04T00:48:31.470925+00:00",
+    "visitStatus": "full",
+    "visitDateUtc": "2026-10-04T00:48:36.735000+00:00"
+  },
+  "metadataIsAdditive": true
+}
