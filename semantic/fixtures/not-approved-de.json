@@ -1,0 +1,128 @@
+{
+  "recordId": "csr:sha256:8a8dc9a778d93b6e039211fb242d61331094d128b022a7a290841ca9bf62c851",
+  "manifest": {
+    "semanticContract": {
+      "name": "psor-semantic-contract",
+      "version": "1.0.0-draft.1"
+    },
+    "coverageProfile": {
+      "id": "administrative-communication",
+      "version": "1"
+    },
+    "vocabularies": [
+      {
+        "id": "example-administrative",
+        "version": "1"
+      }
+    ],
+    "sourceIds": [
+      "source:de"
+    ],
+    "statementIds": [
+      "stmt:1"
+    ],
+    "unresolvedIds": [],
+    "supersedesRecordIds": [],
+    "canonicalization": {
+      "algorithm": "psor-draft-json-v1",
+      "digestAlgorithm": "sha-256"
+    }
+  },
+  "sources": [
+    {
+      "id": "source:de",
+      "digest": {
+        "algorithm": "sha-256",
+        "value": "1b8889ff3421db1237a58cf746e34cd3648b373b7a0bfbd1755b5f809a082e28"
+      },
+      "mediaType": "text/plain",
+      "language": "de",
+      "capturedAt": "2026-10-04T00:00:00Z",
+      "locator": "fixture://source:de"
+    }
+  ],
+  "statements": [
+    {
+      "id": "stmt:1",
+      "assertionKind": "source",
+      "expression": {
+        "kind": "operator",
+        "operator": "NOT",
+        "operands": [
+          {
+            "kind": "predicate",
+            "predicate": "APPROVED",
+            "roles": {
+              "theme": {
+                "kind": "entity",
+                "id": "application:123"
+              }
+            }
+          }
+        ]
+      },
+      "epistemicStatus": "asserted",
+      "material": true,
+      "attribution": {
+        "actor": {
+          "kind": "entity",
+          "id": "authority:7"
+        },
+        "mode": "asserts"
+      },
+      "provenance": [
+        {
+          "sourceId": "source:de",
+          "spans": [
+            {
+              "selector": "sentence:1",
+              "quote": "Der Antrag ist nicht genehmigt."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "unresolved": [],
+  "promotionReceipt": {
+    "receiptId": "receipt:1",
+    "recordId": "csr:sha256:8a8dc9a778d93b6e039211fb242d61331094d128b022a7a290841ca9bf62c851",
+    "semanticContract": {
+      "name": "psor-semantic-contract",
+      "version": "1.0.0-draft.1"
+    },
+    "coverageProfile": {
+      "id": "administrative-communication",
+      "version": "1"
+    },
+    "candidateIds": [
+      "candidate:1",
+      "candidate:2"
+    ],
+    "validationPaths": [
+      {
+        "id": "validation:1",
+        "kind": "llm",
+        "independenceGroup": "model-a",
+        "version": "1",
+        "result": "passed"
+      },
+      {
+        "id": "validation:2",
+        "kind": "parser",
+        "independenceGroup": "parser-b",
+        "version": "1",
+        "result": "passed"
+      }
+    ],
+    "assuranceLevel": "A2",
+    "contractValidation": "passed",
+    "unresolvedMaterialIds": [],
+    "canonicalization": {
+      "algorithm": "psor-draft-json-v1",
+      "digestAlgorithm": "sha-256"
+    },
+    "semanticDigest": "sha256:8a8dc9a778d93b6e039211fb242d61331094d128b022a7a290841ca9bf62c851",
+    "promotedAt": "2026-10-04T00:30:00Z"
+  }
+}

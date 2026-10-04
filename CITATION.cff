@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use or discuss this specification, please cite this release."
+title: "PSOR Semantic Contract 1.0-draft.1"
+type: software
+version: "1.0.0-draft.1"
+date-released: "2026-10-04"
+authors:
+  - name: "PSOR Project"
+repository-code: "https://github.com/ramerstalboll/psor-semantic-contract"
+url: "https://psor.eu/spec/semantic-contract/1.0-draft.1/"
+license: "Apache-2.0"

@@ -1,0 +1,24 @@
+{
+  "id": "administrative-communication",
+  "version": "1",
+  "title": "Administrative Communication",
+  "requiredDimensions": [
+    "referents-and-identity",
+    "predicates-and-semantic-roles",
+    "polarity-and-negation-scope",
+    "modality-and-deontic-force",
+    "quantification",
+    "conditions-and-alternatives",
+    "temporal-semantics",
+    "attribution",
+    "epistemic-status",
+    "values",
+    "provenance"
+  ],
+  "outsideBaseline": [
+    "irony",
+    "metaphor",
+    "emotional-tone",
+    "unexpressed-pragmatics"
+  ]
+}

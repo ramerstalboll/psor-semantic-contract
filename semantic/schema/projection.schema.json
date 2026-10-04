@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://psor.eu/spec/semantic-contract/1.0-draft.1/schema/projection.schema.json",
+  "title": "PSOR Semantic Projection 1.0-draft.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "projectionId",
+    "parentRecordId",
+    "parentSemanticDigest",
+    "kind",
+    "content"
+  ],
+  "properties": {
+    "projectionId": { "type": "string", "minLength": 1 },
+    "parentRecordId": { "type": "string", "pattern": "^csr:sha256:[0-9a-f]{64}$" },
+    "parentSemanticDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "kind": { "enum": ["natural-language", "summary", "notification", "ui", "api"] },
+    "language": { "type": "string", "minLength": 2 },
+    "mediaType": { "type": "string", "minLength": 1 },
+    "content": { "type": ["string", "object", "array"] },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

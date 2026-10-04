@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://psor.eu/spec/semantic-contract/1.0-draft.1/schema/semantic-record.schema.json",
+  "title": "PSOR Canonical Semantic Record 1.0-draft.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "recordId",
+    "manifest",
+    "sources",
+    "statements",
+    "unresolved",
+    "promotionReceipt"
+  ],
+  "properties": {
+    "recordId": { "type": "string", "pattern": "^csr:sha256:[0-9a-f]{64}$" },
+    "manifest": {
+      "$ref": "https://psor.eu/spec/semantic-contract/1.0-draft.1/schema/semantic-manifest.schema.json"
+    },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "statements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/statement" }
+    },
+    "unresolved": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/unresolved" }
+    },
+    "promotionReceipt": {
+      "$ref": "https://psor.eu/spec/semantic-contract/1.0-draft.1/schema/promotion-receipt.schema.json"
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "value"],
+      "properties": {
+        "algorithm": { "const": "sha-256" },
+        "value": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "digest"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "digest": { "$ref": "#/$defs/digest" },
+        "mediaType": { "type": "string", "minLength": 1 },
+        "language": { "type": "string", "minLength": 2 },
+        "capturedAt": { "type": "string", "format": "date-time" },
+        "locator": { "type": "string", "minLength": 1 }
+      }
+    },
+    "term": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "id"],
+          "properties": {
+            "kind": { "const": "entity" },
+            "id": { "type": "string", "minLength": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value"],
+          "properties": {
+            "kind": { "const": "literal" },
+            "value": {
+              "type": ["string", "integer", "boolean", "null"]
+            },
+            "datatype": { "type": "string", "minLength": 1 },
+            "unit": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "expression": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "predicate", "roles"],
+          "properties": {
+            "kind": { "const": "predicate" },
+            "predicate": { "type": "string", "minLength": 1 },
+            "roles": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": { "$ref": "#/$defs/term" }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "operator", "operands"],
+          "properties": {
+            "kind": { "const": "operator" },
+            "operator": {
+              "enum": [
+                "NOT",
+                "MUST",
+                "MAY",
+                "CAN",
+                "SHOULD",
+                "PROHIBITED",
+                "ALL",
+                "SOME",
+                "NONE",
+                "AND",
+                "OR",
+                "IF",
+                "UNLESS",
+                "BEFORE",
+                "AFTER",
+                "UNTIL"
+              ]
+            },
+            "operands": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/expression" }
+            }
+          }
+        }
+      ]
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selector"],
+      "properties": {
+        "selector": { "type": "string", "minLength": 1 },
+        "quote": { "type": "string" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "spans"],
+      "properties": {
+        "sourceId": { "type": "string", "minLength": 1 },
+        "spans": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/span" }
+        }
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor", "mode"],
+      "properties": {
+        "actor": { "$ref": "#/$defs/term" },
+        "mode": {
+          "enum": ["asserts", "reports", "requests", "promises", "denies", "decides", "unknown"]
+        }
+      }
+    },
+    "statement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "assertionKind",
+        "expression",
+        "epistemicStatus",
+        "material"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "assertionKind": { "enum": ["source", "derived", "estimate"] },
+        "expression": { "$ref": "#/$defs/expression" },
+        "attribution": { "$ref": "#/$defs/attribution" },
+        "provenance": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/provenance" }
+        },
+        "derivedFromStatementIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "epistemicStatus": {
+          "enum": ["asserted", "inferred", "estimated", "uncertain", "ambiguous", "unknown"]
+        },
+        "material": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "assertionKind": { "const": "source" } },
+            "required": ["assertionKind"]
+          },
+          "then": {
+            "required": ["attribution", "provenance"],
+            "properties": {
+              "provenance": { "minItems": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "assertionKind": { "const": "derived" } },
+            "required": ["assertionKind"]
+          },
+          "then": {
+            "required": ["derivedFromStatementIds"],
+            "properties": {
+              "derivedFromStatementIds": { "minItems": 1 }
+            }
+          }
+        }
+      ]
+    },
+    "unresolved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "semanticDimension", "description", "material"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "semanticDimension": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "material": { "type": "boolean" },
+        "alternatives": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/expression" }
+        }
+      }
+    }
+  }
+}

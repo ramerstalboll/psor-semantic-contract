@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://psor.eu/spec/semantic-contract/1.0-draft.1/schema/semantic-manifest.schema.json",
+  "title": "PSOR Semantic Manifest 1.0-draft.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "semanticContract",
+    "coverageProfile",
+    "vocabularies",
+    "sourceIds",
+    "statementIds",
+    "unresolvedIds",
+    "canonicalization"
+  ],
+  "properties": {
+    "semanticContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "psor-semantic-contract" },
+        "version": { "const": "1.0.0-draft.1" }
+      }
+    },
+    "coverageProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "vocabularies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "version"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "version": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "sourceIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "statementIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "unresolvedIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "supersedesRecordIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^csr:sha256:[0-9a-f]{64}$" },
+      "default": []
+    },
+    "canonicalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "digestAlgorithm"],
+      "properties": {
+        "algorithm": { "const": "psor-draft-json-v1" },
+        "digestAlgorithm": { "const": "sha-256" }
+      }
+    }
+  }
+}
